@@ -1,4 +1,4 @@
-# 自动添加空格
+# 自动添加空格 - 油猴脚本
 
 > 脚本由 [ChatGPT](https://chat.openai.com/chat) 编写并优化，可能存在 BUG。
 
