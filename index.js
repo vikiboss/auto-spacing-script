@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         自动添加空格，在 CJK （中日繁）字符和英文字母之间自动添加空格
 // @namespace    pangu-userscript
-// @version      1.1.1
+// @version      1.2.0
 // @license      MIT
 // @description  在 CJK （中日繁）字符和英文字母之间自动添加空格，考虑了代码块、DOM 动态更新等情况。
 // @match        http*://*/*
@@ -14,7 +14,7 @@
 
   function addSpacing() {
     const elements = document.querySelectorAll(
-      'body *:not(script):not(style):not(noscript):not(pre):not(code)'
+      'body *:not(script):not(style):not(noscript):not(pre):not(code):not(input):not([contenteditable="true"]'
     )
     elements.forEach(element => {
       if (element.childNodes.length === 1 && element.childNodes[0].nodeType === Node.TEXT_NODE) {
