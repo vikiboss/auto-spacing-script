@@ -10,61 +10,62 @@
 // ==/UserScript==
 
 ;(function () {
-  'use strict'
+  'use strict';
 
   function addSpacing() {
     const elements = document.querySelectorAll(
-      'body *:not(script):not(style):not(noscript):not(pre):not(code):not(input):not([contenteditable="true"]'
-    )
+      'body *:not(script):not(style):not(noscript):not(pre):not(code):not(input):not([contenteditable="true"])'
+    );
     elements.forEach(element => {
       if (element.childNodes.length === 1 && element.childNodes[0].nodeType === Node.TEXT_NODE) {
-        const originalText = element.textContent
-        const newText = pangu.spacing(originalText)
+        const originalText = element.textContent;
+        const newText = pangu.spacing(originalText);
         if (originalText !== newText) {
-          element.textContent = newText
+          element.textContent = newText;
         }
       }
-    })
+    });
   }
 
   function observeDOM(observer) {
-    observer.observe(document.body, { childList: true, subtree: true })
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 
   function debounce(func, wait, immediate) {
-    let timeout
+    let timeout;
     return function () {
-      const context = this,
-        args = arguments
+      const context = this;
+      const args = arguments;
       const later = function () {
-        timeout = null
-        if (!immediate) func.apply(context, args)
-      }
-      const callNow = immediate && !timeout
-      clearTimeout(timeout)
-      timeout = setTimeout(later, wait)
-      if (callNow) func.apply(context, args)
-    }
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      const callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
   }
 
-  const addSpacingDebounced = debounce(addSpacing, 300)
+  const addSpacingDebounced = debounce(addSpacing, 300);
 
   // Run once when the script is loaded
-  addSpacing()
+  addSpacing();
 
   // Run every time the content of the page is changed
   const observer = new MutationObserver(() => {
     requestAnimationFrame(() => {
-      addSpacingDebounced()
-    })
-  })
+      addSpacingDebounced();
+    });
+  });
 
   // Start observing when the DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      observeDOM(observer)
-    })
+      observeDOM(observer);
+    });
   } else {
-    observeDOM(observer)
+    observeDOM(observer);
   }
-})()
+})();
+
