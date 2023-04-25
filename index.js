@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         自动添加空格，在 CJK （中日繁）字符和英文字母之间自动添加空格
 // @namespace    pangu-userscript
-// @version      1.2.0
+// @version      1.2.1
 // @license      MIT
 // @description  在 CJK （中日繁）字符和英文字母之间自动添加空格，考虑了代码块、DOM 动态更新等情况。
 // @match        http*://*/*
