@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         自动添加空格，在 CJK （中日韩）字符和英文字母之间自动添加空格
 // @namespace    pangu-userscript
-// @version      1.3.0
+// @version      1.3.1
 // @license      MIT
 // @description  在 CJK （中日韩）字符和英文字母之间自动添加空格，考虑了输入框、代码块、DOM 动态更新等情况。
 // @match        http*://*/*
@@ -16,9 +16,10 @@
 
   const isIgnore = name => ignores.includes(name)
   const isEditable = el => el.getAttribute('contenteditable')?.toLowerCase() === 'true'
-
+  const isMonaco = el => el.getAttribute('class')?.includes("monaco-editor")
+ 
   function acceptNode(node) {
-    const isAccept = isIgnore(node.tagName) || isEditable(node)
+    const isAccept = isIgnore(node.tagName) || isEditable(node) || isMonaco(node)
     return isAccept ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
   }
 
